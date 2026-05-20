@@ -162,7 +162,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🚀 Training
+## 🚀 Run
 
 Run any baseline using:
 
