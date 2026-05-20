@@ -10,7 +10,7 @@ Mostafa S. Ibrahim, Srikanth Muralidharan, Zhiwei Deng, Arash Vahdat, Greg Mori 
 
 ## 🧠 Overview
 
-his project models group interactions in sports videos through a hierarchical understanding of motion and context.
+This project models group interactions in sports videos through a hierarchical understanding of motion and context.
 
 The system learns representations across three levels:
 
@@ -20,11 +20,22 @@ The system learns representations across three levels:
 - 🏐 Group-level: Final activity classification
 
 Each video clip is transformed from raw frames into structured spatio-temporal representations for group activity reasoning.
+
 ---
 
-## 🏗️ Hierarchical Pipeline
+## Model
 
-- Player crops → Representation extraction → Per-player temporal encoding → Intra-team pooling → Inter-team temporal reasoning → Classification
+![alt text](Images/fig1.png)
+
+- Figure 1: High level figure for group activity recognition via a hierarchical model. Each person in a scene is modeled using a temporal model that captures his/her dynamics, these models are integrated into a higher-level model that captures scene-level activity.
+
+![alt text](Images/fig2-b.png)
+
+- Figure 2: Detailed figure for the model. Given tracklets of K-players, we feed each tracklet in a CNN, followed by a person LSTM layer to represent each player's action. We then pool over all people's temporal features in the scene. The output of the pooling layer is feed to the second LSTM network to identify the whole teams activity.
+
+![alt text](Images/fig3.jpg)
+
+- Figure 3: Previous basic mode drops spatial information. In updated model, 2-group pooling to capture spatial arrangements of players.
 
 
 ## 📊 Dataset
@@ -95,7 +106,7 @@ r_set, r_spike, r_pass, r_winpoint, l_set, l_spike, l_pass, l_winpoint
 ```text
 volleyball/
 ├── models/                 # Deep learning model architectures
-├── data/                  # Dataset loaders, annotations, and preprocessing
+├── Data/                  # Dataset loaders, annotations, and preprocessing
 ├── script/                # Training scripts for different baselines
 ├── engine/                # Training and inference engine functions
 ├── utils/                 # Helper functions and utility modules
@@ -111,7 +122,7 @@ volleyball/
 Extract temporal player-level deep features from volleyball video clips:
 
 ```bash
-python -m data.extract_feature
+python -m Data.extract_feature
 ```
 
 ### Pipeline Overview
