@@ -1,0 +1,29 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environments
+venv/
+env/
+ENV/
+.venv/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Data
+filepkl/
+*.pkl
+*.pickle
+volleyball_dataset.h5
+
+# checkpoints
+checkpoints/
+*.pth
