@@ -27,9 +27,3 @@ volleyball_dataset.h5
 # checkpoints
 checkpoints/
 *.pth
-
-# Images
-Images/
-*.jpg
-*.jpeg
-*.png
