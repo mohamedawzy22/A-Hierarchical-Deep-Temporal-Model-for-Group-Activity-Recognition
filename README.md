@@ -24,7 +24,7 @@ Each video clip is transformed from raw frames into structured spatio-temporal r
 
 ## 🏗️ Hierarchical Pipeline
 
-- Player Crops → CNN Feature Extraction → Frame Pooling → Temporal Modeling → Group     Classification
+- Player crops → Representation extraction → Per-player temporal encoding → Intra-team pooling → Inter-team temporal reasoning → Classification
 
 
 ## 📊 Dataset
