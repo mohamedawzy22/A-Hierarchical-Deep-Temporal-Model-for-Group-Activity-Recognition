@@ -18,7 +18,7 @@ classes:
 
 hyperparameters:
   learning_rate: 0.0004
-  batch_size: 32
+  batch_size: 128
   num_epochs: 20
   scheduler_step_size: 4
   scheduler_gamma: 0.4

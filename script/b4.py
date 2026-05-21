@@ -66,7 +66,7 @@ if __name__ == "__main__":
     test_loader = DataLoader(test_dataset, batch_size=cfg['hyperparameters']['batch_size'], shuffle=False, num_workers=0)
 
 
-model = Baseline4(num_classes=cfg['classes']['num_classes'])
+model = Baseline4(num_classes=cfg['classes']['num_classes'], hidden_dim=cfg['hyperparameters']['hidden_dim'])
 device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 trainer = train_model(
     model=model,

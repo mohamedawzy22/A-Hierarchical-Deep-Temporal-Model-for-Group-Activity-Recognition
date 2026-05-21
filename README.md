@@ -7,12 +7,24 @@ This repository implements a **Hierarchical Deep Temporal Framework** for Group 
 Mostafa S. Ibrahim, Srikanth Muralidharan, Zhiwei Deng, Arash Vahdat, Greg Mori — CVPR 2016
 
 ---
+## Contents
 
-## 🧠 Overview
+<p align="center">
+
+<a href="#overview"><span style="border:1px solid #ddd; padding:6px 10px; border-radius:8px; margin:2px; display:inline-block;">Overview</span></a>
+<a href="#proposed-architecture"><span style="border:1px solid #ddd; padding:6px 10px; border-radius:8px; margin:2px; display:inline-block;">Architecture</span></a>
+<a href="#volleyball-dataset"><span style="border:1px solid #ddd; padding:6px 10px; border-radius:8px; margin:2px; display:inline-block;">Dataset</span></a>
+<a href="#model-evolution--performance"><span style="border:1px solid #ddd; padding:6px 10px; border-radius:8px; margin:2px; display:inline-block;">Performance</span></a>
+<a href="#challenges-limitations--future-work"><span style="border:1px solid #ddd; padding:6px 10px; border-radius:8px; margin:2px; display:inline-block;">Challenges</span></a>
+<a href="#getting-started"><span style="border:1px solid #ddd; padding:6px 10px; border-radius:8px; margin:2px; display:inline-block;">Start</span></a>
+
+</p>
+
+## Overview
 
 This project models group interactions in sports videos through a hierarchical understanding of motion and context.
 
-The system learns representations across three levels:
+The system learns representations across multiple levels:
 
 - 🧍 Player-level: Individual action representation using CNN features
 - 🎞 Frame-level: Spatial aggregation of multiple players 
@@ -23,7 +35,7 @@ Each video clip is transformed from raw frames into structured spatio-temporal r
 
 ---
 
-## Model
+## Proposed Architecture
 
 ![alt text](Images/fig1.png)
 
@@ -35,89 +47,120 @@ Each video clip is transformed from raw frames into structured spatio-temporal r
 
 ![alt text](Images/fig3.jpg)
 
-- Figure 3: Previous basic mode drops spatial information. In updated model, 2-group pooling to capture spatial arrangements of players.
+- Figure 3: Previous basic model drops spatial information. In the updated model, 2-group pooling is used to capture spatial arrangements of players.
 
+---
 
-## 📊 Dataset
+## Volleyball Dataset
 
-### 🧍 Individual Actions (9 classes)
+###  Individual Actions (9 classes)
+
 waiting, setting, digging, falling, spiking, blocking, jumping, moving, standing  
 
-### 🏐 Group Activities (8 classes)
+###  Group Activities (8 classes)
+
 r_set, r_spike, r_pass, r_winpoint, l_set, l_spike, l_pass, l_winpoint  
 
-### 📦 Data Description
+### Data Description
+
 - Player bounding boxes per frame  
 - Temporal tracking across video clips  
 - Clip-level group activity labels  
 
 ---
 
-## 🚧 Challenges
-
-- Ambiguity between individual and group signals  
-- Multi-player interactions in dynamic scenes  
-- Temporal dependencies across frames  
-- Spatial reasoning between teammates  
-
----
-## 🧠 Model Architecture
+## Model Evolution & Performance
 
 | Model       | Description              | Architecture                         | Test Accuracy |
-|------------|--------------------------|--------------------------------------|--------------|
-| Baseline 1  | Simple CNN               | ResNet-50 frame classification       | 71.09%       |
-| Baseline 3A | Feature extractor        | ResNet embeddings                    | 79.78%       |
-| Baseline 3B | Enhanced features        | Improved representation learning     | 78.43%       |
-| Baseline 4  | Temporal modeling        | LSTM sequence modeling              | 81.08%       |
-| Baseline 5  | Multi-stream model       | Feature fusion architecture         | 83.32%       |
-| Baseline 6  | Attention-based model    | Temporal attention mechanism        | 81.00%       |
-| Baseline 7  | Hierarchical model       | Spatio-temporal hierarchy          | 84.82%       |
-| Baseline 8  | Advanced LSTM (Best)    | Dual LSTM + team aggregation        | **87.96%**   |
+|-------------|--------------------------|--------------------------------------|---------------|
+| Baseline 1  | Simple CNN               | ResNet-50 frame classification       | 71.09%        |
+| Baseline 3A | Feature extractor        | ResNet embeddings                    | 79.78%        |
+| Baseline 3B | Enhanced features        | Improved representation learning     | 78.43%        |
+| Baseline 4  | Temporal modeling        | LSTM sequence modeling               | 81.08%        |
+| Baseline 5  | Multi-stream model       | Feature fusion architecture          | 83.32%        |
+| Baseline 6  | Attention-based model    | Temporal attention mechanism         | 81.00%        |
+| Baseline 7  | Hierarchical model       | Spatio-temporal hierarchy            | 84.82%        |
+| Baseline 8  | Advanced LSTM (Best)     | Dual LSTM + team aggregation         | **87.96%**   |
 
-## 🧩 Key Components
+---
+
+##  Results & Insights
+
+###  Key Components
 
 - 🔹 Feature Extraction: 2048-D ResNet embeddings from player crops  
 - 🔹 Temporal Modeling: LSTM sequence learning  
 - 🔹 Spatial Aggregation: Team-aware interaction modeling  
 - 🔹 Hierarchical Classification: Individual → Group prediction  
 
----
-
-## 📈 Key Insights
+###  Key Insights
 
 - Temporal modeling significantly improves performance  
 - Team-based aggregation enhances group understanding  
 - Hierarchical architectures outperform flat CNN models  
 - Best performance achieved by dual-LSTM (Baseline 8)  
 
----
+### Best Model
 
-## 🏁 Best Model
+ **Baseline 8 (Advanced LSTM)**
 
-🏆 **Baseline 8 (Advanced LSTM)**  
-- Accuracy: **87.96%**  
-- Captures team-level interaction dynamics 
+- Accuracy: **87.96%**
+- Captures team-level interaction dynamics
 - Strongest spatio-temporal representation
 - Best generalization across group activities
+
 ---
 
-## 🚀 Getting Started
+##  Challenges, Limitations & Future Work
+
+###  Challenges
+
+- Understanding coordinated team activities from individual player actions  
+- Modeling long-term temporal dependencies in dynamic volleyball scenes  
+- Preserving spatial relationships between teammates during aggregation  
+- Reducing left/right team confusion in spatially symmetric activities  
+
+###  Error Analysis (Baseline 8 - Final Model)
+
+![Baseline 8 Confusion Matrix](confusion_matrix/b8/b8.png)
+
+The confusion matrix of the final Baseline 8 model shows strong overall classification performance with low misclassification across most activity classes.
+
+However, some confusion still appears in spatially symmetric activities, particularly between left and right team actions such as:
+
+- r_set ↔ r_pass  
+- l_winpoint ↔ r_winpoint  
+
+This indicates that the model still struggles with explicit left/right team discrimination in highly similar group formations.
+
+###  Future Improvements
+
+- Convert the current two-stage pipeline into a fully end-to-end trainable framework to improve feature learning and reduce accumulated errors between stages.
+
+- Explore more advanced group activity recognition approaches for stronger spatial reasoning and team-aware modeling.
+
+Example related work:  
+ https://www.cs.sfu.ca/~mori/research/papers/ibrahim-eccv18.pdf
+
+---
+
+##  Getting Started
 
 ```text
 volleyball/
-├── models/                 # Deep learning model architectures
+├── models/                # Deep learning model architectures
 ├── Data/                  # Dataset loaders, annotations, and preprocessing
 ├── script/                # Training scripts for different baselines
 ├── engine/                # Training and inference engine functions
 ├── utils/                 # Helper functions and utility modules
-├── confusion_matrix/     # Confusion matrix visualizations
-├── config/               # Configuration files and constants
-└── logs/                 # Training and evaluation logs
+├── confusion_matrix/      # Confusion matrix visualizations
+├── config/                # Configuration files and constants
+└── logs/                  # Training and evaluation logs
 ```
 
 ---
 
-## 🔧 Feature Extraction
+##  Feature Extraction
 
 Extract temporal player-level deep features from volleyball video clips:
 
@@ -135,6 +178,7 @@ python -m Data.extract_feature
 
 ```python
 (num_players, temporal_frames, feature_dim)
+
 # Example:
 (12, T, 2048)
 ```
@@ -143,7 +187,7 @@ python -m Data.extract_feature
 
 ---
 
-## ⚙️ Requirements
+##  Requirements
 
 - GPU: NVIDIA GeForce RTX 3050 (Laptop GPU)
 - VRAM: 6GB
@@ -152,17 +196,19 @@ python -m Data.extract_feature
 
 ---
 
-## 📦 Installation
+##  Installation
 
 ```bash
 git clone https://github.com/mohamedawzy22/A-Hierarchical-Deep-Temporal-Model-for-Group-Activity-Recognition.git
+
 cd A-Hierarchical-Deep-Temporal-Model-for-Group-Activity-Recognition
+
 pip install -r requirements.txt
 ```
 
 ---
 
-## 🚀 Run
+##  Run
 
 Run any baseline using:
 

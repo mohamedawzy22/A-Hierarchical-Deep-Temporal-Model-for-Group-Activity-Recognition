@@ -33,9 +33,9 @@ class Baseline4(nn.Module):
         self.lstm = nn.LSTM(
             input_size=self.feature_dim,
             hidden_size=hidden_dim,
-            num_layers=2,
+            num_layers=1,
             batch_first=True,
-            dropout=0.3
+            
         )
 
         # =========================
@@ -43,9 +43,13 @@ class Baseline4(nn.Module):
         # =========================
         self.classifier = nn.Sequential(
             nn.Linear(hidden_dim, 512),
+            nn.BatchNorm1d(512),
             nn.ReLU(),
             nn.Dropout(0.5),
-            nn.Linear(512, num_classes)
+            nn.Linear(512, 128),
+            nn.BatchNorm1d(128),
+            nn.ReLU(),           
+            nn.Linear(128, num_classes)
         )
 
     def forward(self, x):

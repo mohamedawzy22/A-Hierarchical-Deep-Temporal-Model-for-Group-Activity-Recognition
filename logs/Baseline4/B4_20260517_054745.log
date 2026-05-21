@@ -1,7 +1,0 @@
-2026-05-17 05:47:45,665 | Experiment: Baseline4
-2026-05-17 05:47:45,665 | Log: logs\Baseline4\B4_20260517_054745.log
-2026-05-17 05:47:47,442 | Loading dataset | split=train | mode=sequence | Total samples: 2152
-2026-05-17 05:47:49,158 | Loading dataset | split=val | mode=sequence | Total samples: 1341
-2026-05-17 05:47:51,009 | Loading dataset | split=test | mode=sequence | Total samples: 1337
-2026-05-17 05:47:51,360 |  Training Started
-2026-05-17 05:47:51,360 |  Experiment Path: checkpoints\Baseline_4
