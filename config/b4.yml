@@ -26,7 +26,7 @@ hyperparameters:
   num_epochs: 20
   scheduler_step_size: 3
   scheduler_gamma: 0.4
-  hidden_dim: 512
+  hidden_dim: 1024
   seed: 43  
 
 
