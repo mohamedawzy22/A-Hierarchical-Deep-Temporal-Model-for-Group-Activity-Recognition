@@ -76,7 +76,7 @@ r_set, r_spike, r_pass, r_winpoint, l_set, l_spike, l_pass, l_winpoint
 | Baseline 1  | Simple CNN               | ResNet-50 frame classification       | 71.09%        |
 | Baseline 3A | Feature extractor        | ResNet embeddings                    | 79.78%        |
 | Baseline 3B | Enhanced features        | Improved representation learning     | 78.43%        |
-| Baseline 4  | Temporal modeling        | LSTM sequence modeling               | 81.08%        |
+| Baseline 4  | Temporal modeling        | LSTM sequence modeling               | 78.09%        |
 | Baseline 5  | Multi-stream model       | Feature fusion architecture          | 83.32%        |
 | Baseline 6  | Attention-based model    | Temporal attention mechanism         | 81.00%        |
 | Baseline 7  | Hierarchical model       | Spatio-temporal hierarchy            | 84.82%        |
